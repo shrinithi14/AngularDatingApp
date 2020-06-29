@@ -1,0 +1,4 @@
+{
+    "omnisharp.projectLoadTimeout" : "1200",
+    // "omnisharp.path" : "C:\\Users\\sadagopans\\.vscode\\extensions\\ms-dotnettools.csharp-1.22.1\\.omnisharp\\1.35.3\\OmniSharp.exe"
+}
