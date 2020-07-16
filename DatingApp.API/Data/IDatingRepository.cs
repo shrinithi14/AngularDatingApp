@@ -11,5 +11,8 @@ namespace DatingApp.API.Data
         void Add<T>(T entity) where T : class ;
         void Remove<T>(T entity) where T : class;
         Task<bool> SaveAll();
+        Task<Photo> GetPhoto(int id);
+
+        Task<Photo> GetMainPhoto(int userId);
     }
 }

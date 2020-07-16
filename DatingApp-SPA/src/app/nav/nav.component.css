@@ -1,3 +1,9 @@
 .dropdown-toggle, .dropdown-item, .nav-link{
     cursor: pointer;
 }
+img{
+    height: 50px;
+    width: 50px;
+    border: 5px solid white;
+    background-color: white;
+}
