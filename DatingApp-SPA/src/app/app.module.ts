@@ -7,8 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { FileUploadModule } from 'ng2-file-upload';
-import {Cloudinary} from '@cloudinary/angular-5.x';
-
+import { Cloudinary } from '@cloudinary/angular-5.x';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -32,6 +36,19 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailEditResolver } from './_resolvers/member-detail-edit.resolver';
 
+const socialconfig = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(
+      '643069709185-e4eqk28nfgn0903u7gq6gcrf6o19fus2.apps.googleusercontent.com'
+    ),
+  },
+]);
+
+export function provideConfig() {
+  return socialconfig;
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +63,7 @@ import { MemberDetailEditResolver } from './_resolvers/member-detail-edit.resolv
     MemberCardComponent,
     MemberDetailComponent,
     MemberDetailEditComponent,
-    MemberPhotoComponent
+    MemberPhotoComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,14 +83,19 @@ import { MemberDetailEditResolver } from './_resolvers/member-detail-edit.resolv
         blacklistedRoutes: ['localhost:5000/api/auth'],
       },
     }),
-    FileUploadModule
+    FileUploadModule,
+    SocialLoginModule,
   ],
   providers: [
     AuthService,
     ErrorInterceptorProvider,
     MemberDetailResolver,
     MemberListResolver,
-    MemberDetailEditResolver
+    MemberDetailEditResolver,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig,
+    },
   ],
   bootstrap: [AppComponent],
 })

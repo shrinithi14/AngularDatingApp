@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using DatingApp.API.Helper;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace DatingApp.API
 {
@@ -43,6 +44,11 @@ namespace DatingApp.API
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+            })
+            .AddGoogle(options =>{
+                options.ClientId = "643069709185-e4eqk28nfgn0903u7gq6gcrf6o19fus2.apps.googleusercontent.com";
+                options.ClientSecret = "GKt2XbvfQsrR-k0yA8cAfphf";
+                options.SignInScheme = IdentityConstants.ExternalScheme;
             });
         }
 

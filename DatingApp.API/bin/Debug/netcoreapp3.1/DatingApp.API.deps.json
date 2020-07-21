@@ -26,6 +26,8 @@
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
           "CloudinaryDotNet": "1.11.0",
+          "Google.Apis.Auth": "1.48.0",
+          "Microsoft.AspNetCore.Authentication.Google": "3.1.6",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.5",
           "Microsoft.EntityFrameworkCore.Design": "3.1.5",
           "Microsoft.EntityFrameworkCore.InMemory": "3.1.5",
@@ -340,7 +342,7 @@
       },
       "CloudinaryDotNet/1.11.0": {
         "dependencies": {
-          "Newtonsoft.Json": "12.0.1"
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
           "lib/netstandard1.3/CloudinaryDotNet.dll": {
@@ -350,6 +352,65 @@
         },
         "compile": {
           "lib/netstandard1.3/CloudinaryDotNet.dll": {}
+        }
+      },
+      "Google.Apis/1.48.0": {
+        "dependencies": {
+          "Google.Apis.Core": "1.48.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "assemblyVersion": "1.48.0.0",
+            "fileVersion": "1.48.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.dll": {}
+        }
+      },
+      "Google.Apis.Auth/1.48.0": {
+        "dependencies": {
+          "Google.Apis": "1.48.0",
+          "Google.Apis.Core": "1.48.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {
+            "assemblyVersion": "1.48.0.0",
+            "fileVersion": "1.48.0.0"
+          },
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.48.0.0",
+            "fileVersion": "1.48.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {}
+        }
+      },
+      "Google.Apis.Core/1.48.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "assemblyVersion": "1.48.0.0",
+            "fileVersion": "1.48.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/3.1.6": {
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "3.1.6.0",
+            "fileVersion": "3.100.620.31714"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.Authentication.Google.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.5": {
@@ -788,7 +849,7 @@
       "Microsoft.IdentityModel.Protocols.OpenIdConnect/5.5.0": {
         "dependencies": {
           "Microsoft.IdentityModel.Protocols": "5.5.0",
-          "Newtonsoft.Json": "12.0.1",
+          "Newtonsoft.Json": "12.0.3",
           "System.IdentityModel.Tokens.Jwt": "6.6.0"
         },
         "runtime": {
@@ -825,11 +886,11 @@
           "System.Security.Principal.Windows": "4.5.0"
         }
       },
-      "Newtonsoft.Json/12.0.1": {
+      "Newtonsoft.Json/12.0.3": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.1.22727"
+            "fileVersion": "12.0.3.23909"
           }
         },
         "compile": {
@@ -3207,6 +3268,34 @@
       "path": "cloudinarydotnet/1.11.0",
       "hashPath": "cloudinarydotnet.1.11.0.nupkg.sha512"
     },
+    "Google.Apis/1.48.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wnZJKPM7blcDzfTyMQ6kHvvDkd89a3C8m8uzTIJ8vrOdRqSAwHDE9nhht6GtcPe+sSfpuav0dX4RFAz2pKzp8w==",
+      "path": "google.apis/1.48.0",
+      "hashPath": "google.apis.1.48.0.nupkg.sha512"
+    },
+    "Google.Apis.Auth/1.48.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OwBOJLMr/4WH3svpoYjOhPu+GYN1N3sEsllBbMHxLYpfCKP13XheifjSnClzXnHuY19tDfN6aEwHpPv5jkG88Q==",
+      "path": "google.apis.auth/1.48.0",
+      "hashPath": "google.apis.auth.1.48.0.nupkg.sha512"
+    },
+    "Google.Apis.Core/1.48.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DJ/2eNBneeqEJuTO0ZPNON9DdDMS2JXcHiszZ86MUNqPtQGhB3xbZoGg1p0sOfvGpyyoqsIMNeJXdSWUHB4E5g==",
+      "path": "google.apis.core/1.48.0",
+      "hashPath": "google.apis.core.1.48.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Google/3.1.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JrIuNuQ4i+k4rVP7NIF/9fzYX7Vk1xPxFEMxBGLTuvZTl6YHdIiS5Dj7sDj935ruX47v8VnGBdHp3PeCvvrzqA==",
+      "path": "microsoft.aspnetcore.authentication.google/3.1.6",
+      "hashPath": "microsoft.aspnetcore.authentication.google.3.1.6.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.5": {
       "type": "package",
       "serviceable": true,
@@ -3466,12 +3555,12 @@
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/12.0.1": {
+    "Newtonsoft.Json/12.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg==",
-      "path": "newtonsoft.json/12.0.1",
-      "hashPath": "newtonsoft.json.12.0.1.nupkg.sha512"
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
     "runtime.native.System/4.3.0": {
       "type": "package",

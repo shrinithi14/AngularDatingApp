@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sadagopans\\source\\DatingApp\\Datingapp.api\\DatingApp.API.csproj": {}
+    "C:\\Users\\sadagopans\\source\\DatingApp\\datingapp.api\\DatingApp.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sadagopans\\source\\DatingApp\\Datingapp.api\\DatingApp.API.csproj": {
+    "C:\\Users\\sadagopans\\source\\DatingApp\\datingapp.api\\DatingApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sadagopans\\source\\DatingApp\\Datingapp.api\\DatingApp.API.csproj",
+        "projectUniqueName": "C:\\Users\\sadagopans\\source\\DatingApp\\datingapp.api\\DatingApp.API.csproj",
         "projectName": "DatingApp.API",
-        "projectPath": "C:\\Users\\sadagopans\\source\\DatingApp\\Datingapp.api\\DatingApp.API.csproj",
+        "projectPath": "C:\\Users\\sadagopans\\source\\DatingApp\\datingapp.api\\DatingApp.API.csproj",
         "packagesPath": "C:\\Users\\sadagopans\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sadagopans\\source\\DatingApp\\Datingapp.api\\obj\\",
+        "outputPath": "C:\\Users\\sadagopans\\source\\DatingApp\\datingapp.api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -48,6 +48,14 @@
             "CloudinaryDotNet": {
               "target": "Package",
               "version": "[1.11.0, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.48.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[3.1.6, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

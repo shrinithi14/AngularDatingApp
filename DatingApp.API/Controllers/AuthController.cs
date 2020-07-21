@@ -7,9 +7,13 @@ using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.Dtos;
 using DatingApp.API.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using static DatingApp.API.Dtos.UserForRegisterDTO;
+using Google.Apis.Auth;
+using static Google.Apis.Auth.GoogleJsonWebSignature;
 
 namespace DatingApp.API.Controllers
 {
@@ -41,9 +45,15 @@ namespace DatingApp.API.Controllers
             {
                 UserName = userForRegisterDto.UserName
             };
-
-            var createdUser = await _authRepo.Register(userTocreate, userForRegisterDto.Password);
-
+            if (userForRegisterDto.ExternalSystem == ExternalSystemType.Google)
+            {
+                userTocreate.ExternalSystem = userForRegisterDto.ExternalSystem.ToString();
+                await _authRepo.Register(userTocreate);
+            }
+            else
+            {
+                await _authRepo.Register(userTocreate, userForRegisterDto.Password);
+            }
             return StatusCode(201);
         }
         [HttpPost("login")]

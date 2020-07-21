@@ -23,15 +23,15 @@ export class AuthService {
     this.photoUrl.next(photoUrl);
   }
 
-  login(model: any) {
-    return this.http.post(this.baseUrl + '/login', model).pipe(
+  login(user: any) {
+    return this.http.post(this.baseUrl + '/login', user).pipe(
       map((response: any) => {
-        const user = response;
+        const userresponse = response;
         if (user) {
-          localStorage.setItem('token', user.token);
-          localStorage.setItem('user', JSON.stringify(user.user));
-          this.decodedToken = this.jwtService.decodeToken(user.token);
-          this.currentUser = user.user;
+          localStorage.setItem('token', userresponse.token);
+          localStorage.setItem('user', JSON.stringify(userresponse.user));
+          this.decodedToken = this.jwtService.decodeToken(userresponse.token);
+          this.currentUser = userresponse.user;
           this.changeUserPhoto(this.currentUser.photoUrl);
         }
       })
@@ -41,6 +41,23 @@ export class AuthService {
   register(model: any) {
     return this.http.post(this.baseUrl + '/register', model);
   }
+
+  // loginGoogle(user: any) {
+  //   console.log('Login google');
+  //   return this.http.post(this.baseUrl + '/login', user).pipe(
+  //     map((response: any) => {
+  //       console.log(response);
+  //       const userresponse = response;
+  //       if (user) {
+  //         localStorage.setItem('token', user.token);
+  //         localStorage.setItem('user', JSON.stringify(userresponse.user));
+  //         this.decodedToken = this.jwtService.decodeToken(user.token);
+  //         this.currentUser = userresponse.user;
+  //         this.changeUserPhoto(this.currentUser.photoUrl);
+  //       }
+  //     })
+  //   );
+  // }
 
   loggedIn() {
     const token = localStorage.getItem('token');
