@@ -13,8 +13,11 @@ export class NavComponent implements OnInit {
   constructor(public authservice: AuthService, private routerService: Router) {}
 
   ngOnInit() {
-    const user : User = JSON.parse(localStorage.getItem('user'));
-    this.authservice.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    this.authservice.currentPhotoUrl.subscribe(
+      (photoUrl) => (this.photoUrl = photoUrl)
+    );
+    console.log(this.photoUrl);
   }
   logOut() {
     this.authservice.logOut();

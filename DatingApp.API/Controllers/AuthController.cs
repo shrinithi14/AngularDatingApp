@@ -41,10 +41,7 @@ namespace DatingApp.API.Controllers
             if (await _authRepo.UserExists(userForRegisterDto.UserName))
                 return BadRequest("Username already exists");
 
-            var userTocreate = new User()
-            {
-                UserName = userForRegisterDto.UserName
-            };
+            var userTocreate = _mapper.Map<User>(userForRegisterDto);
             if (userForRegisterDto.ExternalSystem == ExternalSystemType.Google)
             {
                 userTocreate.ExternalSystem = userForRegisterDto.ExternalSystem.ToString();
@@ -52,6 +49,7 @@ namespace DatingApp.API.Controllers
             }
             else
             {
+                userTocreate.ExternalSystem = null;
                 await _authRepo.Register(userTocreate, userForRegisterDto.Password);
             }
             return StatusCode(201);
@@ -85,6 +83,12 @@ namespace DatingApp.API.Controllers
                 token = tokenHandler.WriteToken(token),
                 user = _mapper.Map<UserForListDTO>(user)
             });
+        }
+        [HttpGet("userpresent/{username}")]
+        public async Task<IActionResult> UserPresent(string username)
+        {
+            var result = await _authRepo.UserExists(username);
+            return Ok(result);
         }
     }
 }

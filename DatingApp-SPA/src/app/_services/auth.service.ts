@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/_models/user';
 
 @Injectable({
@@ -23,6 +23,10 @@ export class AuthService {
     this.photoUrl.next(photoUrl);
   }
 
+  userExist(username: string) {
+    return this.http.get(this.baseUrl + '/userpresent/' + username);
+  }
+
   login(user: any) {
     return this.http.post(this.baseUrl + '/login', user).pipe(
       map((response: any) => {
@@ -38,26 +42,9 @@ export class AuthService {
     );
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl + '/register', model);
+  register(user: User) {
+    return this.http.post(this.baseUrl + '/register', user);
   }
-
-  // loginGoogle(user: any) {
-  //   console.log('Login google');
-  //   return this.http.post(this.baseUrl + '/login', user).pipe(
-  //     map((response: any) => {
-  //       console.log(response);
-  //       const userresponse = response;
-  //       if (user) {
-  //         localStorage.setItem('token', user.token);
-  //         localStorage.setItem('user', JSON.stringify(userresponse.user));
-  //         this.decodedToken = this.jwtService.decodeToken(user.token);
-  //         this.currentUser = userresponse.user;
-  //         this.changeUserPhoto(this.currentUser.photoUrl);
-  //       }
-  //     })
-  //   );
-  // }
 
   loggedIn() {
     const token = localStorage.getItem('token');
