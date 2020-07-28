@@ -13,6 +13,8 @@ import {
   AuthServiceConfig,
   GoogleLoginProvider,
 } from 'angularx-social-login';
+import {TimeagoModule} from 'ngx-timeago';
+
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -63,8 +65,8 @@ export function provideConfig() {
     MemberCardComponent,
     MemberDetailComponent,
     MemberDetailEditComponent,
-    MemberPhotoComponent,
-  ],
+    MemberPhotoComponent
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -86,6 +88,7 @@ export function provideConfig() {
     }),
     FileUploadModule,
     SocialLoginModule,
+    TimeagoModule.forRoot()
   ],
   providers: [
     AuthService,
