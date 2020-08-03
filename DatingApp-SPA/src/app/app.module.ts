@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from 'ngx-gallery-9';
@@ -13,8 +15,7 @@ import {
   AuthServiceConfig,
   GoogleLoginProvider,
 } from 'angularx-social-login';
-import {TimeagoModule} from 'ngx-timeago';
-
+import { TimeagoModule } from 'ngx-timeago';
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
@@ -65,8 +66,8 @@ export function provideConfig() {
     MemberCardComponent,
     MemberDetailComponent,
     MemberDetailEditComponent,
-    MemberPhotoComponent
-    ],
+    MemberPhotoComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -75,6 +76,8 @@ export function provideConfig() {
     BrowserAnimationsModule,
     NgxGalleryModule,
     BsDropdownModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
     RouterModule.forRoot(appRoots),
     TabsModule.forRoot(),
     JwtModule.forRoot({
@@ -88,7 +91,7 @@ export function provideConfig() {
     }),
     FileUploadModule,
     SocialLoginModule,
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
   ],
   providers: [
     AuthService,
