@@ -9,6 +9,7 @@ using DatingApp.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DatingApp.API.Helper;
+using DatingApp.API.Models;
 
 namespace DatingApp.API.Controllers
 {
@@ -42,20 +43,21 @@ namespace DatingApp.API.Controllers
             return Ok(userToReturn);
         }
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]UserParams userParams)
+        public async Task<IActionResult> Get([FromQuery] UserParams userParams)
         {
             var currentuserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             userParams.UserId = currentuserId;
             var currentUser = await _repo.GetUser(currentuserId);
 
-            if(string.IsNullOrWhiteSpace(userParams.Gender)){
-                userParams.Gender = (currentUser.Gender == "male") ? "female": "male";
+            if (string.IsNullOrWhiteSpace(userParams.Gender))
+            {
+                userParams.Gender = (currentUser.Gender == "male") ? "female" : "male";
             }
             var users = await _repo.GetUsers(userParams);
 
             var usersToReturn = _mapper.Map<List<UserForListDTO>>(users);
 
-            Response.AddPagination(users.CurrentPage,users.TotalCount,users.CurrentPage,users.PageSize);
+            Response.AddPagination(users.CurrentPage, users.TotalCount, users.CurrentPage, users.PageSize);
             return Ok(usersToReturn);
         }
 
@@ -72,6 +74,37 @@ namespace DatingApp.API.Controllers
 
             throw new Exception($"Updating User {id} falied");
 
+        }
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> Like(int id, int recipientId)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            var like = await _repo.GetLike(id, recipientId);
+            if (like != null)
+            {
+                return BadRequest("You already liked the user");
+            }
+            if (await _repo.GetUser(recipientId) == null)
+            {
+                return BadRequest("User does not exist");
+            }
+            if (id == recipientId)
+            {
+                return BadRequest("You cannot like yourself");
+            }
+
+            like = new Like()
+            {
+                LikerId = id,
+                LikeeId = recipientId
+            };
+            _repo.Add(like);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            throw new Exception("Cannot like user");
         }
 
     }

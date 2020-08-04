@@ -38,6 +38,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailEditResolver } from './_resolvers/member-detail-edit.resolver';
+import { ListResolver } from './_resolvers/list.resolver';
 
 const socialconfig = new AuthServiceConfig([
   {
@@ -103,6 +104,7 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig,
     },
+    ListResolver
   ],
   bootstrap: [AppComponent],
 })

@@ -17,7 +17,8 @@
       <span class="mr-2">
         <img src="{{photoUrl || '../../../../assets/user.png'}}">
       </span>
-      <a class="dropdown-toggle text-dark" dropdownToggle>Welcome {{authservice.currentUser.knownAs | titlecase}}</a>
+      <a class="dropdown-toggle text-light" dropdownToggle>Welcome
+         {{authservice.currentUser.knownAs | titlecase}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item" [routerLink]="['/member/edit-profile']"><i class="fa fa-user"></i> Edit Profile</a>
         <a class="dropdown-item" (click)="logOut()"><i class="fa fa-sign-out"></i> Logout</a>

@@ -8,6 +8,7 @@ import {
   NgxGalleryImage,
   NgxGalleryAnimation,
 } from 'ngx-gallery-9';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -21,7 +22,8 @@ export class MemberDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -63,5 +65,18 @@ export class MemberDetailComponent implements OnInit {
         this.alertify.error(error);
       }
     );
+  }
+  likeUser(userId: number) {
+    console.log('liked user ' + userId);
+    this.userService
+      .likeUser(this.authService.currentUser.id, userId)
+      .subscribe(
+        (next) => {
+          this.alertify.success('You have liked the user');
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
   }
 }

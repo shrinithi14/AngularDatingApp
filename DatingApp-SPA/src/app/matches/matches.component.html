@@ -1,3 +1,33 @@
-<p>
-  matches works!
-</p>
+  <div class="container mt-3">
+    <div>
+      <div class="text-center mt-3">
+        <h2>Your matches - {{pagination.totalItems}} found</h2>
+      </div>
+      <form class="form-inline" #form="ngForm" novalidate (ngSubmit)="loadUsers()">
+        <div class="col">
+          <div class="btn-group float-left">
+            <button class="btn btn-primary" [(ngModel)]="likeParams" name="includelikers"
+             btnRadio="includelikers"
+             type="button"(click)="loadUsers()">People who likes you</button>
+            <button class="btn btn-primary" [(ngModel)]="likeParams" 
+            name="includelikees" btnRadio="includelikees"
+             type="button" (click)="loadUsers()">People you like</button>
+          </div>
+        </div>
+      </form>
+      <br>
+    </div>
+  
+    <div class="row">
+      <div *ngFor="let user of users" class="col-lg-2 col-md-3 col-sm-6">
+        <app-member-card [user]="user"></app-member-card>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize"
+        [ngModel]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+        firstText="&laquo;" lastText="&raquo;">
+      </pagination>
+    </div>
+  </div>
+
