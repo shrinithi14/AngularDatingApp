@@ -49,7 +49,6 @@ export class MemberPhotoComponent implements OnInit {
       headers
     ): any => {
       const resp: any = JSON.parse(response);
-      console.log(resp);
       const photo: CloudinaryPhoto = {
         publicId: resp.public_id,
         url: resp.url,

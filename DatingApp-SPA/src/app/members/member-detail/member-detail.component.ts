@@ -19,6 +19,7 @@ export class MemberDetailComponent implements OnInit {
   user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryItems: NgxGalleryImage[];
+  userLiked = false;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -42,6 +43,7 @@ export class MemberDetailComponent implements OnInit {
       },
     ];
     this.galleryItems = this.getImages();
+    this.userAlreadyLiked();
   }
 
   getImages() {
@@ -66,13 +68,48 @@ export class MemberDetailComponent implements OnInit {
       }
     );
   }
-  likeUser(userId: number) {
-    console.log('liked user ' + userId);
+
+  handleLike() {
+    if (this.userLiked)
+    {
+      this.UnlikeUser();
+    }
+    else
+    {
+      this.likeUser();
+    }
+  }
+  likeUser() {
     this.userService
-      .likeUser(this.authService.currentUser.id, userId)
+      .likeUser(this.authService.currentUser.id, this.user.id)
       .subscribe(
         (next) => {
           this.alertify.success('You have liked the user');
+          this.userLiked = true;
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
+  }
+
+  userAlreadyLiked() {
+    this.userService
+      .getUsers(null, null, null, null, 'includelikees')
+      .subscribe((result) => {
+        if (result.result.find((u) => u.id === this.user.id) != null) {
+          this.userLiked = true;
+        }
+      });
+  }
+
+  UnlikeUser() {
+    this.userService
+      .UnlikeUser(this.authService.currentUser.id, this.user.id)
+      .subscribe(
+        (next) => {
+          this.alertify.success('You have unliked the user');
+          this.userLiked = false;
         },
         (error) => {
           this.alertify.error(error);

@@ -6,6 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -77,6 +78,7 @@ export function provideConfig() {
     BrowserAnimationsModule,
     NgxGalleryModule,
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
     RouterModule.forRoot(appRoots),
@@ -104,7 +106,7 @@ export function provideConfig() {
       provide: AuthServiceConfig,
       useFactory: provideConfig,
     },
-    ListResolver
+    ListResolver,
   ],
   bootstrap: [AppComponent],
 })

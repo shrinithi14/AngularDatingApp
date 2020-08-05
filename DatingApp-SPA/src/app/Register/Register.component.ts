@@ -13,6 +13,7 @@ import { User } from 'src/_models/user';
 import { UserService } from '../_services/user.service';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-register',
@@ -23,11 +24,14 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   user: User;
   userExist: boolean;
+  bsConfig: Partial<BsDatepickerConfig>;
   constructor(
     private authService: AuthService,
     private alertifyService: AlertifyService,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.bsConfig = Object.assign({}, { containerClass: 'theme-red' });
+  }
 
   @Output() registerMode = new EventEmitter();
   ngOnInit() {
@@ -75,11 +79,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-
   register() {
     this.user = Object.assign({}, this.registerForm.value);
-    console.log(this.registerForm);
-    console.log(this.user);
     this.authService.register(this.user).subscribe(
       (next) => {
         this.alertifyService.confirm(

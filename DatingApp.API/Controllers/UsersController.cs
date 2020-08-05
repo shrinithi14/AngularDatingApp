@@ -106,6 +106,34 @@ namespace DatingApp.API.Controllers
 
             throw new Exception("Cannot like user");
         }
+        [HttpPost("{id}/unlike/{recipientId}")]
+        public async Task<IActionResult> UnLikeUser(int id, int recipientId)
+        {
+
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            if (id == recipientId)
+            {
+                return BadRequest("You cannot unlike yourself");
+            }
+            if (await _repo.GetUser(recipientId) == null)
+            {
+                return BadRequest("User does not exist");
+            }
+            var like = await _repo.GetLike(id, recipientId);
+            
+            if (like == null)
+            {
+                return Ok();
+            }
+            _repo.Remove(like);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            throw new Exception("Cannot unlike user");
+        }
 
     }
 }

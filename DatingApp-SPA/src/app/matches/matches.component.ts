@@ -27,11 +27,9 @@ export class MatchesComponent implements OnInit {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     });
-    console.log(this.users);
   }
 
   loadUsers() {
-    console.log(this.likeParams);
     this.userService
       .getUsers(
         this.pagination.currentPage,

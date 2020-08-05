@@ -17,7 +17,6 @@ export class NavComponent implements OnInit {
     this.authservice.currentPhotoUrl.subscribe(
       (photoUrl) => (this.photoUrl = photoUrl)
     );
-    console.log(this.photoUrl);
   }
   logOut() {
     this.authservice.logOut();

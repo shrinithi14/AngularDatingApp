@@ -20,7 +20,6 @@ export class MemberCardComponent implements OnInit {
   ngOnInit() {}
 
   likeUser(userId: number) {
-    console.log('liked user ' +userId);
     this.userService
       .likeUser(this.authService.currentUser.id, userId)
       .subscribe(

@@ -29,8 +29,10 @@
           registerForm.get('username').touched)
       }" 
       class="form-control" formControlName="username" placeholder="Email" />
-      <div *ngIf="registerForm.get('username').hasError('required')" class="invalid-feedback">Please enter your email</div>
-      <div *ngIf="registerForm.get('username').hasError('userpresent')" class="invalid-feedback">Username already exists</div>
+      <div *ngIf="registerForm.get('username').hasError('required')"
+       class="invalid-feedback">Please enter your email</div>
+      <div *ngIf="registerForm.get('username').hasError('userpresent')" 
+      class="invalid-feedback">Username already exists</div>
     </div>
 
     <div class="form-group">
@@ -52,7 +54,8 @@
         'is-invalid':
           registerForm.get('dateOfBirth').errors &&
           registerForm.get('dateOfBirth').touched
-      }" class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth" type="date" />
+      }" class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth" 
+      type="text" bsDatepicker [bsConfig] ="bsConfig" />
       <div class="invalid-feedback" *ngIf="
         registerForm.get('dateOfBirth').touched &&
         registerForm.get('dateOfBirth').hasError('required')

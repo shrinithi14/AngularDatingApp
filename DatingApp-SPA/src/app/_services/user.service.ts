@@ -64,7 +64,6 @@ export class UserService {
   }
 
   editUser(id: number, user: User) {
-    console.log(user);
     return this.http.put(this.baseUrl + id, user);
   }
 
@@ -85,5 +84,8 @@ export class UserService {
 
   likeUser(likerId: number, likeeId: number) {
     return this.http.post(this.baseUrl + likerId + '/like/' + likeeId, {});
+  }
+  UnlikeUser(likerId: number, likeeId: number) {
+    return this.http.post(this.baseUrl + likerId + '/unlike/' + likeeId, {});
   }
 }
