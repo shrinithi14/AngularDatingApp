@@ -9,6 +9,8 @@ import { CloudinaryPhoto } from 'src/_models/cloudinaryPhoto';
 import { PaginatedData } from 'src/_models/Pagination';
 import { map } from 'rxjs/operators';
 import { Userfilter } from 'src/_models/userfilter';
+import { Message } from 'src/_models/message';
+import { send } from 'process';
 
 @Injectable({
   providedIn: 'root',
@@ -87,5 +89,66 @@ export class UserService {
   }
   UnlikeUser(likerId: number, likeeId: number) {
     return this.http.post(this.baseUrl + likerId + '/unlike/' + likeeId, {});
+  }
+  getMessage(
+    messageParams: string,
+    userId,
+    pageNumber?,
+    pageSize?
+  ): Observable<PaginatedData<Message[]>> {
+    const paginatedMessages = new PaginatedData<Message[]>();
+
+    let params = new HttpParams();
+    if (pageNumber != null && pageSize != null) {
+      params = params.append('pageNumber', pageNumber);
+      params = params.append('pageSize', pageSize);
+    }
+    if (messageParams) {
+      params = params.append('messageContainer', messageParams);
+    }
+    return this.http
+      .get<Message[]>(this.baseUrl + userId + '/message', {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((response) => {
+          paginatedMessages.result = response.body;
+          if (
+            response.headers.has('Pagination') &&
+            response.headers.get('Pagination') != null
+          ) {
+            paginatedMessages.pagination = JSON.parse(
+              response.headers.get('Pagination')
+            );
+          }
+          return paginatedMessages;
+        })
+      );
+  }
+
+  getMessageThread(senderId: number, receiverId: number) {
+    return this.http.get<Message[]>(
+      this.baseUrl + senderId + '/message/thread/' + receiverId
+    );
+  }
+
+  sendMessage(senderId: number, recipientId: number, content: string) {
+    return this.http.post(this.baseUrl + senderId + '/message', {
+      content,
+      recipientId,
+    });
+  }
+
+  deleteMessage(userId: number, messageId: number) {
+    return this.http.post(this.baseUrl + userId + '/message/' + messageId, {});
+  }
+
+  markasReadMessage(userId: number, messageId: number) {
+    console.log('mark as read' + messageId);
+    return this.http.post(
+      this.baseUrl + userId + '/message/' + messageId + '/read',
+      {}
+    ).subscribe();
   }
 }

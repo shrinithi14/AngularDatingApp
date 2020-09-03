@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/_models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/_services/user.service';
@@ -9,6 +9,7 @@ import {
   NgxGalleryAnimation,
 } from 'ngx-gallery-9';
 import { AuthService } from 'src/app/_services/auth.service';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-member-detail',
@@ -20,6 +21,7 @@ export class MemberDetailComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryItems: NgxGalleryImage[];
   userLiked = false;
+  @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -30,6 +32,11 @@ export class MemberDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data) => {
       this.user = data['user'];
+    });
+
+    this.route.queryParams.subscribe(params => {
+      const selectedTab = params['tab'];
+      this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
     });
 
     this.galleryOptions = [
@@ -70,12 +77,9 @@ export class MemberDetailComponent implements OnInit {
   }
 
   handleLike() {
-    if (this.userLiked)
-    {
+    if (this.userLiked) {
       this.UnlikeUser();
-    }
-    else
-    {
+    } else {
       this.likeUser();
     }
   }

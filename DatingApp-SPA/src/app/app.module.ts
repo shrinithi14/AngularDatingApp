@@ -40,6 +40,8 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailEditResolver } from './_resolvers/member-detail-edit.resolver';
 import { ListResolver } from './_resolvers/list.resolver';
+import { MessageResolver } from './_resolvers/message.resolver';
+import { MemberMessageComponent } from './members/member-message/member-message.component';
 
 const socialconfig = new AuthServiceConfig([
   {
@@ -69,6 +71,7 @@ export function provideConfig() {
     MemberDetailComponent,
     MemberDetailEditComponent,
     MemberPhotoComponent,
+    MemberMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +110,7 @@ export function provideConfig() {
       useFactory: provideConfig,
     },
     ListResolver,
+    MessageResolver,
   ],
   bootstrap: [AppComponent],
 })

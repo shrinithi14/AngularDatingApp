@@ -1,3 +1,49 @@
-<p>
-  message works!
-</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="btn-group float-left">
+      <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="unread" (click)="loadMessages()">
+        <i class="fa fa-envelope"></i> Unread</button>
+      <button class="btn btn-primary" [(ngModel)]="messageContainer" btnRadio="inbox" (click)="loadMessages()">
+        <i class="fa fa-envelope-open"></i> Inbox</button>
+      <button class="btn btn-primary" [(ngModel)]="messageContainer" (click)="loadMessages()" btnRadio="outbox">
+        <i class="fa fa-paper-plane"></i> Outbox</button>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-hover mt-4" style="cursor: pointer">
+      <tr>
+        <th style="width: 40%">Message</th>
+        <th style="width: 20%">
+          {{messageContainer === 'outbox' ? 'To' : 'From'}}
+        </th>
+        <th style="width: 20%">
+          {{messageContainer === 'outbox' ? 'Sent' : 'Received'}} </th>
+        <th style="width: 20%"></th>
+      </tr>
+      <tr *ngFor="let message of messages" 
+      [routerLink]="['/members/',message.senderId]"
+      [queryParams] = "{tab: 3}">
+        <td>
+          {{message.content}}
+        </td>
+        <td>
+          {{messageContainer === 'outbox' ? message.recipientKnownAs : message.senderKnownAs}}
+          <img src="{{ messageContainer === 'outbox' ? message.recipientPhotoUrl : message.senderPhotoUrl}}"
+            class="rounded-circle">
+        </td>
+        <td>
+          {{message.dateSent | timeago}}
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center">
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.pageSize"
+      [ngModel]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+      firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+  </div>
+</div>
